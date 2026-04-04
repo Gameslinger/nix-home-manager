@@ -1,0 +1,28 @@
+--- a/orangehrm-@version@/src/lib/config/ConfigHelper.php	2025-08-31 16:42:17.385496631 +0000
++++ b/orangehrm-@version@/src/lib/config/ConfigHelper.php	2025-08-31 16:48:39.698223218 +0000
+@@ -33,6 +33,9 @@
+         $pathToProjectBase = realpath(__DIR__ . '/../../../');
+         $pathToSrcDir = realpath($pathToProjectBase . '/src/');
+-        $pathToConfigDir = $pathToProjectBase . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'confs';
++        $pathToConfigDir = '/var/orangehrm';
++        @mkdir('/var/orangehrm/log', 0774, true);
++        #@mkdir('/var/orangehrm', 0770, true);
++        @mkdir('/tmp/orangehrm', 0770, true);
+         return [
+             Config::BASE_DIR => $pathToProjectBase,
+             Config::SRC_DIR => $pathToSrcDir,
+@@ -40,12 +43,12 @@
+             Config::PUBLIC_DIR => realpath($pathToProjectBase . '/web'),
+             Config::DOCTRINE_PROXY_DIR => realpath($pathToSrcDir . '/config/proxy'),
+             Config::TEST_DIR => realpath($pathToSrcDir . '/test'),
+-            Config::LOG_DIR => $pathToSrcDir . DIRECTORY_SEPARATOR . 'log',
+-            Config::CACHE_DIR => $pathToSrcDir . DIRECTORY_SEPARATOR . 'cache',
++            Config::LOG_DIR => '/var/orangehrm/log' . DIRECTORY_SEPARATOR . 'log',
++            Config::CACHE_DIR => '/tmp/orangehrm' . DIRECTORY_SEPARATOR . 'cache',
+             Config::CONFIG_DIR => $pathToConfigDir,
+             Config::CRYPTO_KEY_DIR => $pathToConfigDir . DIRECTORY_SEPARATOR . 'cryptokeys',
+             Config::SESSION_DIR => null,
+             Config::CONF_FILE_PATH => $pathToConfigDir . DIRECTORY_SEPARATOR . 'Conf.php',
+         ];
+     }
+ 
